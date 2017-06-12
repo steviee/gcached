@@ -115,6 +115,21 @@ func ItemSet(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ItemDelete(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	bucketKey := vars["key"]
+	itemKey := vars["itemKey"]
+	bucket, ok := buckets[bucketKey]
+
+	if ok {
+		delete(bucket.Items, itemKey)
+		w.WriteHeader(http.StatusOK)
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+	}
+}
+
 func ItemShow(w http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)

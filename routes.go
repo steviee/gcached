@@ -31,6 +31,12 @@ var routes = Routes{
 		BucketCreate,
 	},
 	Route{
+		"BucketDelete",
+		"DELETE",
+		"/{key}",
+		BucketDelete,
+	},
+	Route{
 		"ItemShow",
 		"GET",
 		"/{key}/{itemKey}",
@@ -47,6 +53,12 @@ var routes = Routes{
 		"POST",
 		"/{key}/{itemKey}",
 		ItemSet,
+	},
+	Route{
+		"ItemDelete",
+		"DELETE",
+		"/{key}/{itemKey}",
+		ItemDelete,
 	},
 	/*  ,
 	Route{
