@@ -5,7 +5,7 @@ machine:
 dependencies:
   pre:
     - go get github.com/tools/godep
-    - go get
+
 
   override:
     - mkdir -p "$GOPATH/src/$IMPORT_PATH"
@@ -13,7 +13,8 @@ dependencies:
 
 test:
   pre:
-    - go vet ./...
+    - go get
+#    - go vet ./...
 
 #  override:
 #    - godep go test ./...
