@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"time"
 
-	. "github.com/steviee/gcached/lib"
+	. "github.com/steviee/gcached/src"
 )
 
 func main() {
