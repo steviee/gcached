@@ -17,7 +17,7 @@ func Logger(inner http.Handler, name string) http.Handler {
 		statusCode := lrw.statusCode
 
 		log.Printf(
-			"%-6s%-6d%30s%-15s%9s",
+			"%-6s%-6d%-30s\t%-15s%9s",
 			r.Method,
 			statusCode,
 			r.RequestURI,
