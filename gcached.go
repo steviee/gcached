@@ -16,10 +16,9 @@ var buckets = map[string]Bucket{}
 
 func main() {
 
-	// the global buckets list
-	buckets = map[string]Bucket{}
-
 	fmt.Println("gcached starting up...")
+
+	back := StartBackgroundDump()
 
 	stop := make(chan os.Signal)
 	addr := ":" + os.Getenv("PORT")
@@ -39,11 +38,18 @@ func main() {
 		}
 	}()
 
-	<-stop
+	<-stop // stop the server
 
 	fmt.Println("\nShutting down the server...")
 
-	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	back <- true
+
+	// dump the data (finally)
+	DumpToDisk()
 
 	h.Shutdown(ctx)
+	fmt.Println("\nShutdown complete...")
+
 }
