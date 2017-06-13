@@ -13,7 +13,7 @@ dependencies:
 
 test:
   pre:
-    - go get
+#    - go get
 #    - go vet ./...
 
 #  override:
