@@ -9,7 +9,7 @@ dependencies:
   override:
     #- mkdir -p "$GOPATH/src/$IMPORT_PATH"
     #- rsync -azrC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
-    - go get -t -d -v ./...
+    - go get -t -d -v "$GOPATH/src/$IMPORT_PATH/"
     
 test:
   pre:
