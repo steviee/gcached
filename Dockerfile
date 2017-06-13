@@ -1,4 +1,6 @@
 FROM golang:1.8.3 as builder
+ENV GOPATH=/golang
+
 WORKDIR /golang/src/gcached
 ADD . /golang/src/gcached
 RUN go get -d -v

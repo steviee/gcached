@@ -4,12 +4,11 @@ machine:
 
 dependencies:
   pre:
-    - go get github.com/tools/godep
-
+  # - go get github.com/tools/godep
 
   override:
-    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
-    - rsync -azrC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
+    #- mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    #- rsync -azrC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
     - go get -t -d -v ./...
     
 test:
