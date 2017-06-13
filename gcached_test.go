@@ -1,10 +1,11 @@
 package main
 
 import (
-	. "gcached/lib"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	. "github.com/steviee/gcached/lib"
 
 	"github.com/gorilla/mux"
 )

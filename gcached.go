@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	. "gcached/lib"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
+
+	. "github.com/steviee/gcached/lib"
 )
 
 func main() {
