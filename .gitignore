@@ -3,6 +3,8 @@
 *.a
 *.so
 debug.test
+gcached
+gcached.db
 
 # Folders
 _obj

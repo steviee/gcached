@@ -3,16 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	. "gcached/lib"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 )
-
-// the global buckets list
-// var buckets map[string]Bucket
-var buckets = map[string]Bucket{}
 
 func main() {
 

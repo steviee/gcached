@@ -1,6 +1,7 @@
 package main
 
 import (
+	. "gcached/lib"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -47,7 +48,6 @@ func TestBucketIndex(t *testing.T) {
 	}
 
 }
-
 
 func TestItemCreate(t *testing.T) {
 	m = NewRouter()
