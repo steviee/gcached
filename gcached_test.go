@@ -5,7 +5,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	. "github.com/steviee/gcached/gcached"
+	"github.com/steviee/gcached/store"
+	"github.com/steviee/gcached/service"
 
 	"github.com/gorilla/mux"
 )
