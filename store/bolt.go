@@ -46,7 +46,7 @@ func DumpToDisk() {
 
 	// store some data
 	err = db.Update(func(tx *bolt.Tx) error {
-		for _, bucket := range buckets {
+		for _, bucket := range Buckets {
 			boltBucket, err := tx.CreateBucketIfNotExists([]byte(bucket.Key))
 			if err != nil {
 				return err

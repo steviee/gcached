@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/steviee/gcached/store"
 )
 
 /*
@@ -33,7 +34,7 @@ func BucketsIndex(w http.ResponseWriter, r *http.Request) {
 
 	// get bucket keys
 	list := make([]string, 0)
-	for _, v := range buckets {
+	for _, v := range store.Buckets {
 		list = append(list, v.Key)
 	}
 
@@ -59,8 +60,8 @@ func BucketCreate(w http.ResponseWriter, r *http.Request) {
 		ttl = 0
 	}
 
-	bucket := Bucket{Key: bucketKey, DefaultTTL: ttl, Items: make(map[string]Item), CreatedAt: time.Now()}
-	buckets[bucketKey] = bucket
+	bucket := store.Bucket{Key: bucketKey, DefaultTTL: ttl, Items: make(map[string]store.Item), CreatedAt: time.Now()}
+	store.Buckets[bucketKey] = bucket
 
 	w.WriteHeader(http.StatusCreated)
 }
@@ -71,7 +72,7 @@ func BucketDelete(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bucketKey := vars["key"]
 
-	delete(buckets, bucketKey)
+	delete(store.Buckets, bucketKey)
 
 	w.WriteHeader(http.StatusOK)
 }
@@ -82,7 +83,7 @@ func BucketIndex(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bucketKey := vars["key"]
 
-	bucket, ok := buckets[bucketKey]
+	bucket, ok := store.Buckets[bucketKey]
 
 	if ok {
 		if err := json.NewEncoder(w).Encode(bucket); err != nil {
@@ -105,9 +106,9 @@ func ItemSet(w http.ResponseWriter, r *http.Request) {
 		ttl = 0
 	}
 
-	bucket, ok := buckets[bucketKey]
+	bucket, ok := store.Buckets[bucketKey]
 	if ok {
-		item := Item{Key: itemKey, Value: "x", CreatedAt: time.Now(), ProlongedAt: time.Now(), TTL: ttl}
+		item := store.Item{Key: itemKey, Value: "x", CreatedAt: time.Now(), ProlongedAt: time.Now(), TTL: ttl}
 		bucket.Items[itemKey] = item
 		w.WriteHeader(http.StatusOK)
 	} else {
@@ -120,7 +121,7 @@ func ItemDelete(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bucketKey := vars["key"]
 	itemKey := vars["itemKey"]
-	bucket, ok := buckets[bucketKey]
+	bucket, ok := store.Buckets[bucketKey]
 
 	if ok {
 		delete(bucket.Items, itemKey)
@@ -136,7 +137,7 @@ func ItemShow(w http.ResponseWriter, r *http.Request) {
 	bucketKey := vars["key"]
 	itemKey := vars["itemKey"]
 
-	bucket, ok := buckets[bucketKey]
+	bucket, ok := store.Buckets[bucketKey]
 	if ok {
 		item, itemOk := bucket.Items[itemKey]
 		if itemOk {

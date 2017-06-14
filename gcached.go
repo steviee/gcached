@@ -8,13 +8,16 @@ import (
 	"os"
 	"os/signal"
 	"time"
+
+	"github.com/steviee/gcached/service"
+	"github.com/steviee/gcached/store"
 )
 
 func main() {
 
 	fmt.Println("gcached starting up...")
 
-	back := StartBackgroundDump()
+	back := store.StartBackgroundDump()
 
 	stop := make(chan os.Signal)
 	addr := ":" + os.Getenv("PORT")
@@ -24,7 +27,7 @@ func main() {
 
 	signal.Notify(stop, os.Interrupt)
 
-	router := NewRouter()
+	router := service.NewRouter()
 	h := &http.Server{Addr: addr, Handler: router}
 
 	go func() {
@@ -43,7 +46,7 @@ func main() {
 	back <- true
 
 	// dump the data (finally)
-	DumpToDisk()
+	store.DumpToDisk()
 
 	h.Shutdown(ctx)
 	fmt.Println("\nShutdown complete...")

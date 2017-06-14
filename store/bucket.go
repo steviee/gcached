@@ -11,4 +11,4 @@ type Bucket struct {
 
 // the global buckets list
 // var buckets map[string]Bucket
-var buckets = map[string]Bucket{}
+var Buckets = map[string]Bucket{}
