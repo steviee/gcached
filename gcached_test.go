@@ -6,13 +6,14 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
+	"github.com/steviee/gcached/service"
 )
 
 var m *mux.Router
 var rec *httptest.ResponseRecorder
 
 func TestBucketsIndex(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/", nil)
 
@@ -24,7 +25,7 @@ func TestBucketsIndex(t *testing.T) {
 }
 
 func TestBucketCreate(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("POST", "/testbucket", nil)
 
@@ -36,7 +37,7 @@ func TestBucketCreate(t *testing.T) {
 }
 
 func TestBucketIndex(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/testbucket", nil)
 
@@ -49,7 +50,7 @@ func TestBucketIndex(t *testing.T) {
 }
 
 func TestItemCreate(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("POST", "/testbucket/testitem", nil)
 
@@ -61,7 +62,7 @@ func TestItemCreate(t *testing.T) {
 }
 
 func TestItemSet(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("PUT", "/testbucket/testitem", nil)
 
@@ -73,7 +74,7 @@ func TestItemSet(t *testing.T) {
 }
 
 func TestItemShow(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/testbucket/testitem", nil)
 
@@ -85,7 +86,7 @@ func TestItemShow(t *testing.T) {
 }
 
 func TestItemDelete(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("DELETE", "/testbucket/testitem", nil)
 
@@ -97,7 +98,7 @@ func TestItemDelete(t *testing.T) {
 }
 
 func TestBucketDelete(t *testing.T) {
-	m = NewRouter()
+	m = service.NewRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("DELETE", "/testbucket", nil)
 
